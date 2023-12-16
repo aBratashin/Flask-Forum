@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Добавить тему
+{% endblock %}
+
+{% block content %}
+{% if current_user and current_user.role == 'admin' %}
+<div class="container mt-5">
+    <h1 class="display-4 text-center">Добавить новую тему</h1>
+
+    <form method="post">
+        <div class="mb-3">
+            <label for="topicTitle" class="form-label">Заголовок темы</label>
+            <input name="title" type="text" class="form-control" id="topicTitle" required>
+        </div>
+        <div class="mb-3">
+            <label for="topicContent" class="form-label">Содержание темы</label>
+            <textarea name="content" class="form-control" id="topicContent" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Добавить тему</button>
+    </form>
+
+    <a href="{{ url_for('topics', forum_id=forum.id) }}" class="btn btn-secondary mt-3">Назад к темам</a>
+</div>
+{% else %}
+<div class="container mt-5">
+    <h1 class="display-4 text-center text-danger">Доступ запрещен</h1>
+</div>
+{% endif %}
+{% endblock %}

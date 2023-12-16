@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Добавить форум
+{% endblock %}
+
+{% block content %}
+{% if current_user and current_user.role == 'admin' %}
+<div class="container mt-5">
+    <h1 class="display-4 text-center">Добавить новый форум</h1>
+
+    <form method="post">
+        <div class="mb-3">
+            <label for="forumName" class="form-label">Название форума</label>
+            <input name="name" type="text" class="form-control" id="forumName" required>
+        </div>
+        <div class="mb-3">
+            <label for="forumDescription" class="form-label">Описание форума</label>
+            <textarea name="description" class="form-control" id="forumDescription" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Создать форум</button>
+    </form>
+</div>
+{% else %}
+<div class="container mt-5">
+    <h1 class="display-4 text-center text-danger">Доступ запрещен</h1>
+</div>
+{% endif %}
+{% endblock %}

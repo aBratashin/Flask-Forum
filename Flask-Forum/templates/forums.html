@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Форумы
+{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1 class="display-4 text-center">Список форумов</h1>
+
+    {% if current_user and current_user.role == 'admin' %}
+    <a href="{{ url_for('add_forum') }}" class="btn btn-primary mb-3">Добавить форум</a>
+    {% endif %}
+
+    <ul class="list-group mt-4">
+        {% for forum in forums_list %}
+        <li class="list-group-item">
+            <a href="{{ url_for('topics', forum_id=forum.id) }}">{{ forum.name }}</a>
+            <p>{{ forum.description }}</p>
+
+            {% if current_user and current_user.role == 'admin' %}
+            <form method="post" action="{{ url_for('delete_forum', forum_id=forum.id) }}"
+                id="delete_forum_form_{{ forum.id }}">
+                <button type="submit" class="btn btn-danger">Удалить форум</button>
+            </form>
+            {% endif %}
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

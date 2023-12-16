@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Авторизация
+{% endblock %}
+
+{% block content %}
+<div class="container form-container mt-5">
+    <h2 class="display-4 text-center mb-4">Авторизация</h2>
+    <form method="post">
+        {% if not current_user %}
+        <div class="mb-3">
+            <label for="loginUsername" class="form-label">Имя пользователя</label>
+            <input type="text" name="username" class="form-control" id="loginUsername" placeholder="Введите ваше имя:">
+        </div>
+        <div class="mb-3">
+            <label for="loginPassword" class="form-label">Пароль</label>
+            <input type="password" name="password" class="form-control" id="loginPassword"
+                placeholder="Введите пароль:">
+        </div>
+        <button type="submit" class="btn btn-success btn-block">Войти</button>
+        {% endif %}
+        {% if current_user %}
+        <h1 class="display-6 text-center text-danger">Выйдите из аккаунта, чтобы войти в другой!</h1>
+        {% endif %}
+    </form>
+</div>
+{% endblock %}
